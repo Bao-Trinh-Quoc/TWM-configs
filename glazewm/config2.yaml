@@ -76,7 +76,7 @@ window_effects:
 
     # Change the transparency of the window.
     transparency:
-      enabled: false
+      enabled: true
       # Can be something like '95%' or '0.95' for slightly transparent windows.
       # '0' or '0%' is fully transparent (and, by consequence, unfocusable).
       opacity: '95%'
@@ -123,7 +123,7 @@ workspaces:
   - name: '1'
     display_name: "1: Browsers"
   - name: '2'
-    display_name: "2: Terminals"
+    display_name: "2: Misc"
   - name: '3'
     display_name: "3: Code"
   - name: '4'
@@ -250,7 +250,7 @@ keybindings:
 
   # Change the focused window to be floating.
   - commands: ['toggle-floating --centered']
-    bindings: ['alt+shift+space']
+    bindings: ['alt+shift+e']
 
   # Change the focused window to be tiling.
   - commands: ['toggle-tiling']
