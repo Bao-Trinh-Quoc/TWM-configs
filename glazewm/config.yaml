@@ -9,7 +9,9 @@ general:
   shutdown_commands: ['shell-exec taskkill /IM zebar.exe /F']
 
   # Commands to run after the WM config is reloaded.
-  config_reload_commands: []
+  config_reload_commands:
+    - 'wm-redraw' 
+    - 'shell-exec zebar --reload'
 
   # Whether to automatically focus windows underneath the cursor.
   focus_follows_cursor: false
@@ -37,14 +39,14 @@ general:
   # effect if `hide_method: 'hide'`.
   # - 'true': Show all windows (regardless of workspace).
   # - 'false': Only show windows from the currently shown workspaces.
-  show_all_in_taskbar: false
+  show_all_in_taskbar: true
 
 gaps:
   # Whether to scale the gaps with the DPI of the monitor.
   scale_with_dpi: true
 
   # Gap between adjacent windows.
-  inner_gap: '5px'
+  inner_gap: '3px'
 
   # Gap between windows and the screen edge.
   outer_gap:
@@ -93,8 +95,8 @@ window_effects:
       enabled: true
       style: 'rounded'
     transparency:
-      enabled: false
-      opacity: '0%'
+      enabled: true
+      opacity: '85%'
 
 window_behavior:
   # New windows are created in this state whenever possible.
@@ -119,15 +121,16 @@ window_behavior:
 
       # Whether to show fullscreen windows as always on top.
       shown_on_top: false
-
+# ⁠🖤
 workspaces:
   - name: '1'
-    display_name: "1: Browsers"
+    display_name: "1: Browsers 💗"
   - name: '2'
-    display_name: "2: Misc"
+    display_name: "2: Misc 💛"
   - name: '3'
-    display_name: "3: Code"
+    display_name: "3: Code 💜"
   - name: '4'
+    display_name: "4: Misc 🤎"
   - name: '5'
   - name: '6'
   - name: '7'
@@ -173,16 +176,10 @@ window_rules:
     match:
       # Move code editors to workspace 3.
       - window_process: { regex: "Code|sublime_text|notepad++|atom" }
-  - commands: ["set-floating"]
+  - commands: ["set-floating --centered"]
     match:
       - window_process: { equals: "explorer"}
-  - commands: ["resize --width -10%"]
-    match:
-      - window_process: { equals: "explorer" } 
-  - commands: ["resize --height -10%"]
-    match:
-      - window_process: { equals: "explorer" } 
-  - commands: ["set-floating"]
+  - commands: ["set-floating --centered"]
     match:
       - window_process: { equals: "WindowsTerminal" }
   - commands: ["resize --width -10%"]
@@ -213,13 +210,17 @@ binding_modes:
 keybindings:
   # Shift focus in a given direction.
   - commands: ['focus --direction left']
-    bindings: ['alt+h', 'alt+left']
+    # bindings: ['alt+h', 'alt+left']
+    bindings: ['alt+h']
   - commands: ['focus --direction right']
-    bindings: ['alt+l', 'alt+right']
+    # bindings: ['alt+l', 'alt+right']
+    bindings: ['alt+l']
   - commands: ['focus --direction up']
-    bindings: ['alt+k', 'alt+up']
+    # bindings: ['alt+k', 'alt+up']
+    bindings: ['alt+k']
   - commands: ['focus --direction down']
-    bindings: ['alt+j', 'alt+down']
+    # bindings: ['alt+j', 'alt+down']
+    bindings: ['alt+j']
 
   # Move focused window in a given direction.
   - commands: ['move --direction left']
