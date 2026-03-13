@@ -50,7 +50,7 @@ gaps:
 
   # Gap between windows and the screen edge.
   outer_gap:
-    top: '42px'
+    top: '40px'
     right: '0px'
     bottom: '0px'
     left: '0px'
@@ -62,7 +62,7 @@ window_effects:
     # ** Exclusive to Windows 11 due to API limitations.
     border:
       enabled: true
-      color: '#00ffff'
+      color: '#FFC0CB'
 
     # Remove the title bar from the window's frame. Note that this can
     # cause rendering issues for some applications.
@@ -94,7 +94,7 @@ window_effects:
       enabled: true
       style: 'rounded'
     transparency:
-      enabled: true
+      enabled: false
       opacity: '85%'
 
 window_behavior:
@@ -123,21 +123,27 @@ window_behavior:
 # ⁠💙🩵💜🤎🖤🌈
 workspaces:
   - name: '1'
-    display_name: "1: Browsers 💛"
-    # keep_alive: true
+    # display_name: "1: Browsers 💛"
+    display_name: "1"
+    keep_alive: true
   - name: '2'
-    display_name: "2: Misc ❤️"
-    # keep_alive: true 
+    # display_name: "2: Misc ❤️"
+    display_name: "2"
+    keep_alive: true
   - name: '3'
-    display_name: "3: Code 🧡"
-    # keep_alive: true
+    # display_name: "3: Code 🧡"
+    display_name: "3"
+    keep_alive: true
   - name: '4'
-    display_name: "4: Work 🩷"
-    # keep_alive: true
+    # display_name: "4: Work 🩷"
+    display_name: "4"
+    keep_alive: true
   - name: '5'
-    display_name: "5: Misc 💚"
-    # keep_alive: true
+    # display_name: "5: Misc 💚"
+    display_name: "5"
+    keep_alive: true
   - name: '6'
+    keep_alive: true
   - name: '7'
   - name: '8'
   - name: '9'
@@ -173,11 +179,11 @@ window_rules:
     match:
       # Matches "powershell.exe" (Windows PowerShell) or "pwsh.exe" (PowerShell Core)
       - window_process: { regex: "WindowsTerminal" }
-  - commands: ["move --workspace 2", "set-floating"]
+  - commands: ["move --workspace 2", "set-floating --centered=true"]
     match:
       # Matches MobaXterm.exe
       - window_process: { regex: "MobaXterm" }
-  - commands: ["move --workspace 3"]
+  - commands: ["move --workspace 5"]
     match:
       # Move code editors to workspace 3.
       - window_process: { regex: "Code|sublime_text|notepad++|atom" }
@@ -185,7 +191,7 @@ window_rules:
     match:
       # Matches Edge and both "Classic" and "New" Teams
       - window_process: { regex: "msedge|Teams|ms-teams" }
-  - commands: ["set-floating"]
+  - commands: ["set-floating --centered=true --width=80% --height=80%"]
     match:
       - window_process: { equals: "explorer" }
 
@@ -231,14 +237,14 @@ keybindings:
     bindings: ['alt+shift+j', 'alt+shift+down']
 
   # Resize focused window by a percentage or pixel amount.
-  - commands: ['resize --width -2%']
-    bindings: ['alt+u']
-  - commands: ['resize --width +2%']
-    bindings: ['alt+p']
-  - commands: ['resize --height +2%']
-    bindings: ['alt+o']
-  - commands: ['resize --height -2%']
-    bindings: ['alt+i']
+  # - commands: ['resize --width -2%']
+  #   bindings: ['alt+u']
+  # - commands: ['resize --width +2%']
+  #   bindings: ['alt+p']
+  # - commands: ['resize --height +2%']
+  #   bindings: ['alt+o']
+  # - commands: ['resize --height -2%']
+  #   bindings: ['alt+i']
 
   # As an alternative to the resize keybindings above, resize mode enables
   # resizing via arrow keys or HJKL. The binding mode is defined above with
@@ -259,6 +265,11 @@ keybindings:
   # Change focus from tiling windows -> floating -> fullscreen.
   - commands: ['wm-cycle-focus']
     bindings: ['alt+space']
+
+  # A dedicated workspace for hiding windows quickly.
+  - commands: ['move --workspace 6']
+    bindings: ['alt+shift+c']
+
 
   # Change the focused window to be floating.
   - commands: ['toggle-floating --centered']
@@ -304,9 +315,9 @@ keybindings:
   - commands: ['focus --prev-active-workspace']
     bindings: ['alt+a']
   - commands: ['focus --next-active-workspace-on-monitor']
+    bindings: ['alt+4']
+  - commands: ['focus --prev-active-workspace-on-monitor']
     bindings: ['alt+`']
-  # - commands: ['focus --prev-active-workspace-on-monitor']
-  #   bindings: ['alt+a']
   # Focus the workspace that last had focus.
   - commands: ['focus --recent-workspace']
     bindings: ['alt+d']
@@ -319,11 +330,16 @@ keybindings:
   - commands: ['focus --workspace 3']
     bindings: ['alt+3']
   - commands: ['focus --workspace 4']
-    bindings: ['alt+4']
+    # bindings: ['alt+4']
+    bindings: ['alt+z']
+
   - commands: ['focus --workspace 5']
-    bindings: ['alt+5']
+    # bindings: ['alt+5']
+    # alt+5 is hard to reach so use alt+c
+    bindings: ['alt+x']
   - commands: ['focus --workspace 6']
-    bindings: ['alt+6']
+    # bindings: ['alt+6']
+    bindings: ['alt+c']
   - commands: ['focus --workspace 7']
     bindings: ['alt+7']
   - commands: ['focus --workspace 8']
@@ -337,12 +353,10 @@ keybindings:
     bindings: ['alt+shift+a']
   - commands: ['move-workspace --direction right']
     bindings: ['alt+shift+f']
-
-    
-  # - commands: ['move-workspace --direction up']
-  #   bindings: ['alt+shift+d']
-  # - commands: ['move-workspace --direction down']
-  #   bindings: ['alt+shift+s']
+  - commands: ['move-workspace --direction up']
+    bindings: ['alt+shift+d']
+  - commands: ['move-workspace --direction down']
+    bindings: ['alt+shift+s']
 
   # Move focused window to a workspace defined in `workspaces` config.
   - commands: ['move --workspace 1', 'focus --workspace 1']
@@ -352,11 +366,14 @@ keybindings:
   - commands: ['move --workspace 3', 'focus --workspace 3']
     bindings: ['alt+shift+3']
   - commands: ['move --workspace 4', 'focus --workspace 4']
-    bindings: ['alt+shift+4']
+    # bindings: ['alt+shift+4']
+    bindings: ['alt+shift+z']
   - commands: ['move --workspace 5', 'focus --workspace 5']
-    bindings: ['alt+shift+5']
+    # bindings: ['alt+shift+5']
+    bindings: ['alt+shift+x']
   - commands: ['move --workspace 6', 'focus --workspace 6']
-    bindings: ['alt+shift+6']
+    # bindings: ['alt+shift+6']
+    bindings: ['alt+shift+c']
   - commands: ['move --workspace 7', 'focus --workspace 7']
     bindings: ['alt+shift+7']
   - commands: ['move --workspace 8', 'focus --workspace 8']
@@ -365,7 +382,8 @@ keybindings:
     bindings: ['alt+shift+9']
   - commands: ['move-workspace --direction right', 'focus --next-active-workspace']
     bindings: ['alt+0']
+  # - commands: ['move-workspace --direction up', 'focus --next-active-workspace']
+  #   bindings: ['alt+0']
   # - commands: ['move-workspace --direction left', 'focus --prev-active-workspace']
-    # bindings: ['alt+0']
-
+  # bindings: ['alt+0']
 
