@@ -125,24 +125,30 @@ workspaces:
   - name: '1'
     # display_name: "1: Browsers 💛"
     display_name: "1"
+    bind_to_monitor: 0
     keep_alive: true
   - name: '2'
     # display_name: "2: Misc ❤️"
     display_name: "2"
+    bind_to_monitor: 0
     keep_alive: true
   - name: '3'
     # display_name: "3: Code 🧡"
     display_name: "3"
+    bind_to_monitor: 0
     keep_alive: true
   - name: '4'
     # display_name: "4: Work 🩷"
     display_name: "4"
+    bind_to_monitor: 1
     keep_alive: true
   - name: '5'
     # display_name: "5: Misc 💚"
     display_name: "5"
+    bind_to_monitor: 1
     keep_alive: true
   - name: '6'
+    bind_to_monitor: 1
     keep_alive: true
   - name: '7'
   - name: '8'
@@ -171,6 +177,11 @@ window_rules:
         window_class: { not_regex: 'OpusApp' }
       - window_process: { equals: 'POWERPNT' }
         window_class: { not_regex: 'PPTFrameClass' }
+      # ignore SnippingTool
+      - window_process: { equals: 'SnippingTool' }
+      # Ignore Task Manager
+      - window_process: { equals: 'Taskmgr' }
+      - window_process: { equals: 'Camera'}
   - commands: ["move --workspace 1"]
     match:
       # Move browsers to workspace 1.
@@ -185,8 +196,8 @@ window_rules:
       - window_process: { regex: "MobaXterm" }
   - commands: ["move --workspace 5"]
     match:
-      # Move code editors to workspace 3.
-      - window_process: { regex: "Code|sublime_text|notepad++|atom" }
+      # Move code editors to workspace 5.
+      - window_process: { regex: "Code|sublime_text|notepad++|atom|Antigravity" }
   - commands: ["move --workspace 4"]
     match:
       # Matches Edge and both "Classic" and "New" Teams
@@ -266,10 +277,6 @@ keybindings:
   - commands: ['wm-cycle-focus']
     bindings: ['alt+space']
 
-  # A dedicated workspace for hiding windows quickly.
-  - commands: ['move --workspace 6']
-    bindings: ['alt+shift+c']
-
 
   # Change the focused window to be floating.
   - commands: ['toggle-floating --centered']
@@ -315,9 +322,9 @@ keybindings:
   - commands: ['focus --prev-active-workspace']
     bindings: ['alt+a']
   - commands: ['focus --next-active-workspace-on-monitor']
-    bindings: ['alt+4']
-  - commands: ['focus --prev-active-workspace-on-monitor']
     bindings: ['alt+`']
+  # - commands: ['focus --prev-active-workspace-on-monitor']
+  #   bindings: ['alt+`']
   # Focus the workspace that last had focus.
   - commands: ['focus --recent-workspace']
     bindings: ['alt+d']
@@ -386,4 +393,5 @@ keybindings:
   #   bindings: ['alt+0']
   # - commands: ['move-workspace --direction left', 'focus --prev-active-workspace']
   # bindings: ['alt+0']
+
 
