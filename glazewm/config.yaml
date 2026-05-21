@@ -18,7 +18,7 @@ general:
 
   # Whether to switch back and forth between the previously focused
   # workspace when focusing the current workspace.
-  toggle_workspace_on_refocus: true
+  toggle_workspace_on_refocus: false
 
   cursor_jump:
     # Whether to automatically move the cursor on the specified trigger.
@@ -190,7 +190,10 @@ window_rules:
   - commands: ["set-floating --centered=true --width 80% --height 80%"]
     match:
       - window_process: { equals: "WindowsTerminal" }
-      
+  - commands: ["move --workspace 4"]
+    match:
+      # Move onenote to workspace 4.
+      - window_process: { regex: "ONENOTE" }
       
 
 binding_modes:
@@ -261,8 +264,10 @@ keybindings:
     bindings: ['alt+v']
 
   # Change focus from tiling windows -> floating -> fullscreen.
+  # - commands: ['wm-cycle-focus']
+  #   bindings: ['alt+space']
   - commands: ['wm-cycle-focus']
-    bindings: ['alt+space']
+    bindings: ['alt+s']
 
   # Change the focused window to be floating.
   - commands: ['toggle-floating --centered']
@@ -303,17 +308,14 @@ keybindings:
     bindings: ['alt+enter']
 
   # Focus the next/previous active workspace defined in `workspaces` config.
-  - commands: ['focus --next-active-workspace']
-    bindings: ['alt+s']
-  - commands: ['focus --prev-active-workspace']
-    bindings: ['alt+a']
+  # - commands: ['focus --next-active-workspace']
+  #   bindings: ['alt+s']
+  # - commands: ['focus --prev-active-workspace']
+  #   bindings: ['alt+a']
 
   # Focus the workspace that last had focus.
-  # with the toggle_workspace_on_refocus setting enabled, this allows you to switch back and 
-  # forth between two workspaces by pressing the same keybinding.
-  # so this keybinding is optional 
-  # - commands: ['focus --recent-workspace']
-  #   bindings: ['alt+d']
+  - commands: ['focus --recent-workspace']
+    bindings: ['alt+d']
 
   # Change focus to a workspace defined in `workspaces` config.
   - commands: ['focus --workspace 1']
@@ -323,11 +325,11 @@ keybindings:
   - commands: ['focus --workspace 3']
     bindings: ['alt+3']
   - commands: ['focus --workspace 4']
-    bindings: ['alt+4']
+    bindings: ['alt+z']
   - commands: ['focus --workspace 5']
-    bindings: ['alt+5']
+    bindings: ['alt+x']
   - commands: ['focus --workspace 6']
-    bindings: ['alt+6']
+    bindings: ['alt+c']
   - commands: ['focus --workspace 7']
     bindings: ['alt+7']
   - commands: ['focus --workspace 8']
@@ -354,11 +356,11 @@ keybindings:
   - commands: ['move --workspace 3', 'focus --workspace 3']
     bindings: ['alt+shift+3']
   - commands: ['move --workspace 4', 'focus --workspace 4']
-    bindings: ['alt+shift+4']
+    bindings: ['alt+shift+z']
   - commands: ['move --workspace 5', 'focus --workspace 5']
-    bindings: ['alt+shift+5']
+    bindings: ['alt+shift+x']
   - commands: ['move --workspace 6', 'focus --workspace 6']
-    bindings: ['alt+shift+6']
+    bindings: ['alt+shift+c']
   - commands: ['move --workspace 7', 'focus --workspace 7']
     bindings: ['alt+shift+7']
   - commands: ['move --workspace 8', 'focus --workspace 8']
@@ -366,9 +368,6 @@ keybindings:
   - commands: ['move --workspace 9', 'focus --workspace 9']
     bindings: ['alt+shift+9']
 
-  # another move to 5 
-  - commands: ['focus --workspace 5']
-    bindings: ['alt+`']
-  # another move to 4
-  - commands: ['focus --workspace 4']
-    bindings: ['alt+d']
+  # # another move to 5 
+  # - commands: ['focus --workspace 5']
+  #   bindings: ['alt+`']
